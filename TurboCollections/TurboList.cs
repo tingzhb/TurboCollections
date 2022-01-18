@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace TurboCollections {
@@ -18,16 +17,19 @@ public class TurboList<T> {
 		items = newArray;
 	}
 	public T Get(int index) {
+		if (index > Count) {
+			throw new Exception("Cannot GET a non-existent item!");
+		}
 		return items[index];
 	}
-	public T Set(int index, T value) {
-		return items[index] = value;
+	public void Set(int index, T value) {
+		if (index > Count) {
+			throw new Exception("Cannot SET a non-existent item!");
+		}
+		items[index] = value;
 	}
 	public void Clear() {
-		// items = Array.Empty<T>();
-		for (int i = 0; i < Count; i++) {
-			items[i] = default;
-		}
+		items = Array.Empty<T>();
 	}
 	public void RemoveAt(int index) {
 		for (int i = index; i < Count; i++) {
@@ -47,6 +49,8 @@ public class TurboList<T> {
 	// 	}
 	// 	return false;
 	// }
-	
+	public void AddRange(IEnumerable<T> items) {
+		
+	}
 }
 }
